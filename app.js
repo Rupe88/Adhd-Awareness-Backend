@@ -19,7 +19,7 @@ app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: ['https://adhd-awareness-frontend.vercel.app'],
+  origin: "https://adhd-awareness-frontend.vercel.app",
   credentials: true, // Important for allowing cookies across domains
 }));
 
