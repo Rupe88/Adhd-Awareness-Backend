@@ -70,7 +70,7 @@ const loginUser = catchAsyncErrors(async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true, //enable this when you have https://
       secure: true,
-      sameSite: None,
+      sameSite: true,
     });
     return res.status(200).json({
       message: "user login Successfully",
