@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const connectionDB = require("./config/connection");
 const cookieParser = require("cookie-parser");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const translate = require('@vitalets/google-translate-api'); // Library for translation
+const translate  = require('google-translate-open-api');
 
 // Routes
 const authRoutes = require("./routes/userRoute");
@@ -15,7 +15,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY); // Store API key in .env file
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 // Middlewares
@@ -46,8 +46,8 @@ app.post('/chat', async (req, res) => {
 
     if (translateToNepali) {
       // Translate the response to Nepali
-      const translated = await translate(text, { to: 'ne' });
-      return res.json({ response: translated.text });
+      const translated = await translate(text, { tld: 'com', to: 'ne' });
+      return res.json({ response: translated.data[0] });
     }
 
     res.json({ response: text });
