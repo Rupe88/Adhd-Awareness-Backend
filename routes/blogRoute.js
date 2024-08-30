@@ -9,6 +9,7 @@ const {
 } = require("../controller/blogController");
 const verifyToken = require("../middleware/verifyToken");
 const isAdminn = require("../middleware/isAdmin");
+// const upload = require("../middleware/multerMiddleware");
 const router = express.Router();
 //routes
 router.post("/create-post", verifyToken, isAdminn, createPost);
