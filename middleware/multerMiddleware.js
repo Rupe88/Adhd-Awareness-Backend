@@ -1,6 +1,6 @@
 const multer = require('multer');
 const path = require('path');
-// const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 // Set storage engine
 const storage = multer.diskStorage({
@@ -28,7 +28,7 @@ function checkFileType(file, cb) {
 // Initialize multer
 const upload = multer({
   storage,
-  limits: { fileSize: 1024}, 
+  limits: { fileSize: 1 * 1024 * 1024 }, // Set file size limit to 1 MB
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   },
