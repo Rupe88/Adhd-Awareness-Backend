@@ -1,12 +1,17 @@
 const catchAsyncErrors = require("../middleware/catchAsyncError");
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 const Blog = require("../model/blogModel");
 const Comment = require("../model/commentModel");
+const notifySubscribers = require("./notificationController");
 //create post
 const createPost = catchAsyncErrors(async (req, res) => {
   try {
     const newPost = new Blog({ ...req.body, author: req.userId });
     await newPost.save();
+
+    // notify subscriber about the new post
+    notifySubscribers(newPost);
+
 
     return res.status(200).json({
       message: "Post created successfully!",
@@ -91,7 +96,10 @@ const getSinglePost = catchAsyncErrors(async (req, res) => {
     }
 
     // Fetch the comments associated with the post and populate the user details
-    const comments = await Comment.find({ postId }).populate("user", "username email");
+    const comments = await Comment.find({ postId }).populate(
+      "user",
+      "username email"
+    );
 
     return res.status(200).json({
       post,
@@ -199,6 +207,8 @@ const relatedPOst = catchAsyncErrors(async (req, res) => {
     });
   }
 });
+
+
 module.exports = {
   createPost,
   getAllPost,
@@ -206,4 +216,5 @@ module.exports = {
   updatePost,
   deletePost,
   relatedPOst,
+
 };

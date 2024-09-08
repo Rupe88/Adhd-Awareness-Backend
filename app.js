@@ -5,11 +5,12 @@ const connectionDB = require("./config/connection");
 const cookieParser = require("cookie-parser");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const translate  = require('google-translate-open-api');
-
+const notificationRoutes=require("./routes/notificationRoute")
 // Routes
 const authRoutes = require("./routes/userRoute");
 const blogRoutes = require("./routes/blogRoute");
 const commentRoutes = require("./routes/commentRoute");
+const job = require("./jobs/emailJob");
 
 dotenv.config();
 
@@ -61,9 +62,11 @@ app.post('/chat', async (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/comment", commentRoutes);
+app.use("/api/notifications", notificationRoutes)
 
 // Start the server and connect to the database
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   connectionDB();
+job.start();
 });
