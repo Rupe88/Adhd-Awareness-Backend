@@ -58,6 +58,14 @@ app.post('/chat', async (req, res) => {
   }
 });
 
+
+router.get("/test", (req, res)=>{
+  console.log("hello")
+  res.status(200).json({
+    "hello world"
+  })
+})
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/blog", blogRoutes);
