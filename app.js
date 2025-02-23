@@ -59,7 +59,7 @@ app.post('/chat', async (req, res) => {
 });
 
 
-router.get("/test", (req, res)=>{
+app.get("/test", (req, res)=>{
   console.log("hello")
   res.status(200).json({
     "hello world"
