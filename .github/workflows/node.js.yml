@@ -27,4 +27,4 @@ jobs:
       run: |
         touch .env
         echo "SECRET=${{ secrets.ADHD_SECRET }}" >> .env
-    - run: pm2 start server.js
+    - run: pm2 start app.js
