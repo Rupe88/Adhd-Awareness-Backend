@@ -59,7 +59,7 @@ app.post('/chat', async (req, res) => {
 });
 
 
-app.get("/test", (req, res)=>{
+app.get("/test-data", (req, res)=>{
   console.log("hello")
   res.status(200).json({
     "hello world"
