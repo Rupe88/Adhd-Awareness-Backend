@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-
+// mongodb connection
 const connectionDB=()=>{
    mongoose.connect(process.env.DB_URI,{
     serverSelectionTimeoutMS: 5000
