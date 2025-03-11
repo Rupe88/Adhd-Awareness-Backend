@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Blog = require("../model/blogModel");
 const Comment = require("../model/commentModel");
 const notifySubscribers = require("./notificationController");
-//create post
+//create post controller
 const createPost = catchAsyncErrors(async (req, res) => {
   try {
     const newPost = new Blog({ ...req.body, author: req.userId });
